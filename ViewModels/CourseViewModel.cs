@@ -24,6 +24,8 @@ namespace Lang_BigSchool.ViewModels
         public byte Category { get; set; }
         public IEnumerable<Category> Categories { get; set; }
 
+        public string Heading { get; set; }
+
         public DateTime GetDateTime()
         {
             return DateTime.Parse(string.Format("{0} {1}", Date, Time));

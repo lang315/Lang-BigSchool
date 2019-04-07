@@ -19,17 +19,31 @@ namespace Lang_BigSchool.Controllers
         }
 
         // GET: Courses
+        public ActionResult Create()
+        {
+            var viewModel = new CourseViewModel()
+            {
+                Categories = _dbContext.Categories.ToList(),
+                Heading = "Add Courses"
+            };
+            return View(viewModel);
+        }
+
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(CourseViewModel viewModel)
         {
-
-            if (!ModelState.IsValid)
-            {
-                viewModel.Categories = _dbContext.Categories.ToList();
-                return View("Create", viewModel);
-            }
+            //var viewModel = new CourseViewModel
+            //{
+            //    Categories = _dbContext.Categories.ToList()
+            //};
+            //return View(viewModel);
+            //if (!ModelState.IsValid)
+            //{
+            //    viewModel.Categories = _dbContext.Categories.ToList();
+            //    return View("Create", viewModel);
+            //}
 
             var course = new Course
             {
