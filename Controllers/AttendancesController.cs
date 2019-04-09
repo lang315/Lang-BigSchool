@@ -1,4 +1,5 @@
-﻿using Lang_BigSchool.Models;
+﻿using Lang_BigSchool.DTOs;
+using Lang_BigSchool.Models;
 using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
@@ -21,15 +22,15 @@ namespace Lang_BigSchool.Controllers
         }
 
         [HttpPost]
-        public IHttpActionResult Attend([FromBody] int courseID)
+        public IHttpActionResult Attend(AttendanceDto attendanceDto)
         {
             var userID = User.Identity.GetUserId();
-            if (_dbContext.Attendances.Any(a => a.AttendeeID == userID && a.CourseID == courseID))
+            if (_dbContext.Attendances.Any(a => a.AttendeeID == userID && a.CourseID == attendanceDto.CourseID))
                 return BadRequest("The Attendance already exists!");
 
             var attendance = new Attendance
             {
-                CourseID = courseID,
+                CourseID = attendanceDto.CourseID,
                 AttendeeID = userID
             };
 
